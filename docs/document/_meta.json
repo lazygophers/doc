@@ -1,0 +1,25 @@
+[
+  {
+    "type": "file",
+    "name": "lazygophers"
+  },
+  {
+    "type": "file",
+    "name": "使用前必读"
+  },
+  {
+    "type": "file",
+    "name": "快速开始"
+  },
+  {
+    "type": "dir",
+    "name": "指令说明",
+    "label":"指令说明",
+    "collapsible": true,
+    "collapsed": false
+  },
+  {
+    "type": "file",
+    "name": "配置文件"
+  }
+]

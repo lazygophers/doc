@@ -1,0 +1,80 @@
+---
+pageType: doc
+
+title: 使用前必读
+
+sidebar: true
+outline: true
+footer: true
+---
+import {Badge} from '@theme';
+
+# {frontmatter.title}
+
+::: tip
+本项目主要以 [lrpc](https://github.com/lazygophers/lrpc) 为生成模板，后续会考虑通过生成模板库的新式，支持其它常用的框架
+为了避免一些不必要的误解，我们需要先达成以下共识
+:::
+
+<Badge text="非主动" type="warning"/> 表示若用户没有配置，则会生效的逻辑
+
+## 生成项目结构
+
+::: tip
+代码生成的项目接口（无关使用的后端框架）
+以下接口以 `example` 项目为例
+:::
+
+```
+example
+├── example.proto   // 单体项目推荐放在当前目录，微服务推荐放在公共仓库
+│
+├── example.pb.go
+├── orm_gen.go      // gorm 配套的接口协议定义
+├── table_gen.go    // 表名相关的定义
+│
+├── go.mod
+├── go.sum
+│
+├── .editorconfig   // 用于 IDE 对文件的格式化
+│
+└── internal
+    ├── state           // 全局的有状态的数据中心
+    │   ├── state.go
+    │   ├── config.go   // 初始化配置，会根据 环境变量 -> 启动目录 -> 程序目录 的顺序依次寻找配置
+    │   ├── table.go    // 初始化表、对象
+    │   └── cache.go    // 初始化缓存
+    │
+    └──impl             // 接口实现
+
+```
+
+## 关于 Model/Table 类型
+
+::: tip
+一般均与数据表存在一对一的关系
+:::
+
+- 所有的数据表的类型名都需要以 `Model` 为开头，例如 `ModelUser`，`ModelOrder` 等
+- <Badge text="非主动" type="warning"/>数据表默认使用 `id` 作为主键，如果存在字段名为 `id` 的字段，那么将会使用该字段作为主键，并且主动为其添加相关 `gorm` 标签
+- <Badge text="非主动" type = "warning" / >数据表默认使用 `created_at`、`updated_at`、`deleted_at` 作为时间字段，如果存在字段名为 `created_at`、`updated_at`、`deleted_at` 的字段，那么将会使用该字段作为时间字段，并且主动为其添加相关 `gorm` 标签
+
+## 接口
+
+- 所有接口的请求、返回类型都需要为 `Req`、`Resp` 结尾，例如 `UserListReq`、`UserListResp` 等
+- <Badge text="非主动" type="warning"/>所有接口均为 `POST` 类型请求
+- <Badge text="非主动" type="warning"/>接口路径为在 proto 中定义的 &lt;server name&gt;/&lt;rpc name&gt;
+
+### 常用CURD的命名规则
+
+::: tip
+以下内容将以 `ModelUser` 为例
+:::
+
+- list: `ListUser`
+- add/create: `AddUser`
+- set: `SetUser`
+- get: `GetUser`
+- del: `DelUser`
+- update: `UpdateUser`
+- get use username: `GetUserByUsername`

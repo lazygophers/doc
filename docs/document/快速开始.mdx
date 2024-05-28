@@ -1,0 +1,57 @@
+---
+pageType: doc
+
+title: 快速开始
+
+sidebar: true
+outline: true
+footer: true
+---
+
+import * as React from 'react';
+import Timeline from '@mui/lab/Timeline';
+import TimelineItem, {timelineItemClasses} from '@mui/lab/TimelineItem';
+import TimelineSeparator from '@mui/lab/TimelineSeparator';
+import TimelineConnector from '@mui/lab/TimelineConnector';
+import TimelineContent from '@mui/lab/TimelineContent';
+import TimelineDot from '@mui/lab/TimelineDot';
+
+# {frontmatter.title}
+
+<Timeline
+    sx={{
+        [`& .${timelineItemClasses.root}:before`]: {
+            flex: 0,
+            padding: 0,
+        },
+    }}
+>
+    <TimelineItem>
+        <TimelineSeparator>
+            <TimelineDot variant="outlined"/>
+            <TimelineConnector/>
+        </TimelineSeparator>
+        <TimelineContent>安装 [protoc](https://github.com/protocolbuffers/protobuf/releases)
+            并配置环境变量</TimelineContent>
+    </TimelineItem>
+    <TimelineItem>
+        <TimelineSeparator>
+            <TimelineDot variant="outlined" color="primary"/>
+            <TimelineConnector/>
+        </TimelineSeparator>
+        <TimelineContent>安装 [protoc-gen-go](https:// github.com/golang/protobuf) 并配置环境变量 <br/> `go install github.com/golang/protobuf/protoc-gen-go`</TimelineContent>
+    </TimelineItem>
+    <TimelineItem>
+        <TimelineSeparator>
+            <TimelineDot variant="outlined" color="secondary"/>
+            <TimelineConnector/>
+        </TimelineSeparator>
+        <TimelineContent>安装 [codegen](https://github.com/lazygophers/codegen) <br/> `go install github.com/lazygophers/codegen/cmd@latest`</TimelineContent>
+    </TimelineItem>
+    <TimelineItem>
+        <TimelineSeparator>
+            <TimelineDot variant="outlined"/>
+        </TimelineSeparator>
+        <TimelineContent>执行命令 <br/> `codegen gen pb -i <proto文件路径>` </TimelineContent>
+    </TimelineItem>
+</Timeline>

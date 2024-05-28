@@ -1,0 +1,118 @@
+---
+pageType: doc
+
+title: 配置文件
+
+sidebar: true
+outline: true
+footer: true
+---
+
+
+
+# {frontmatter.title} <SourceCode href="https://cdn.jsdelivr.net/gh/lazygophers/codegen@master/example.codegen.cfg.yaml" />
+
+
+配置文件名 `codegen.cfg.yaml`
+
+会依次在以下路径依次查找，如果没有找到则使用默认配置
+- 环境变量（LAZYGO_CODEGEN_CONFIG_FILE）
+- 用户配置路径（/root/.config/lazygophers）
+
+
+```yml title=codegen.cfg.yaml
+protoc_path: "<protoc的绝对路径>"
+protogen_go_path: "<protoc-gen-go的绝对路径>"
+
+# 生成的代码的目录，即 protoc 执行的路径，实际生成的代码将会放在 <output_path>/<go_package> 下
+# 如果不指定，默认规则为 <proto_file_path>/../<go_package>
+output_path: "<生成的代码的目录>"
+go_module_prefix: "<go module的前缀，在生成时会拼接proto中的 go_package 字段当做包名>"
+
+# 不在 指定 proto 文件所在目录的其它被引用的包路径
+#	支持绝对路径、相对生成路径 (相对于 output_path)
+proto_files:
+    - "./core/"
+    - "~/proto/"
+
+# 自定义模版文件，要求 .gtpl 格式
+template:
+    # .editorconfig 模板文件路径，用于 IDE 的默认格式化
+    editorconfig: "<.editorconfig 文件路径，如果不存在则使用默认>"
+    # orm.go 模板文件路径，用于 gorm 的相关数据生成
+    orm: "<orm.go 模板文件路径，如果不存在则是使用默认>"
+    # table_name.go 模板文件路径，用于 gorm 的相关表名
+    table_name: "<table_name.go 模板文件路径，如果不存在则是使用默认>"
+
+    # .proto 文件相关的模板文件
+    proto:
+        # rpc 服务的模板文件路径
+        service: "proto.service 的模板文件路径"
+
+        # rpc 相关的
+        rpc:
+            # key → action value → 模版文件路径
+            add:
+                name: "rpc 名字的生成模板"
+                req: "message.request 生成模板"
+                resp: "messsage.response 生成模板"
+            set:
+                name: "rpc 名字的生成模板"
+                req: "message.request 生成模板"
+                resp: "messsage.response 生成模板"
+            update:
+                name: "rpc 名字的生成模板"
+                req: "message.request 生成模板"
+                resp: "messsage.response 生成模板"
+            del:
+                name: "rpc 名字的生成模板"
+                req: "message.request 生成模板"
+                resp: "messsage.response 生成模板"
+            # 如果 key 为 list，会触发筛选项的生辰
+            list:
+                name: "rpc 名字的生成模板"
+                req: "message.request 生成模板"
+                resp: "messsage.response 生成模板"
+
+    # state/table.go 模板文件路径
+    table: "<state/table.go 模板文件路径，如果不存在则是使用默认>"
+    # state/conf.go 模板文件路径
+    conf: "<state/conf.go 模板文件路径，如果不存在则是使用默认>"
+    # state/cache.go 模板文件路径
+    cache: "<state/cache.go 模板文件路径，如果不存在则是使用默认>"
+    # state/state.go 模板文件路径
+    state: "<state/state.go 模板文件路径，如果不存在则是使用默认>"
+
+# 默认的标签，会追加到原始标签中，key 为标签名, value.key 为字段名, value.value 为标签值
+default_tag:
+    gorm:
+        id: "column:id;primaryKey;autoIncrement;not null"
+        created_at: "column:created_at;<-:create;autoCreateTime;not null"
+        updated_at: "column:updated_at;<-;autoUpdateTime;not null"
+        deleted_at: "column:deleted_at;autoDeleteTime"
+        name: "type:varchar(255);not null"
+        username: "type:varchar(255);not null"
+        email: "type:varchar(255);not null"
+    validate:
+        name: "required,max=200,min=2"
+        username: "required,max=100"
+        email: "required,email"
+
+# 数据表相关的配置
+tables:
+    # 是否关闭，默认为为 false，如果单独使用命令，则不会生效
+    disable: false
+
+    # 是否关闭自动生成的 gorm tag，默认为 false
+    # 关闭自动生成 id 相关的gorm tag，默认为 false
+    disable_field_id: false
+    # 关闭自动生成 created_at 的gorm tag，默认为 false
+    disable_field_created_at: false
+    # 关闭自动生成 updated_at 的gorm tag，默认为 false
+    disable_field_updated_at: false
+    # 关闭自动生成 deleted_at 的gorm tag，默认为 false
+    disable_field_deleted_at: false
+    # 关闭自动生成 column 的gorm tag，默认为 false
+    disable_gorm_tag_column: false
+
+```

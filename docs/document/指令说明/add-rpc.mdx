@@ -1,0 +1,130 @@
+---
+pageType: doc
+
+title: add-rpc
+
+sidebar: true
+outline: true
+footer: true
+---
+
+
+
+import {Badge} from "@theme";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+
+# {frontmatter.title}
+
+::: tip
+为指定 Model 批量添加 CURD 接口
+:::
+
+## 参数说明
+
+<Table sx={{width: "100%"}}>
+    <TableHead>
+        <TableRow>
+            <TableCell align="center">参数</TableCell>
+            <TableCell align="center">类型</TableCell>
+            <TableCell align="center">功能</TableCell>
+            <TableCell align="center">支持的选项</TableCell>
+        </TableRow>
+    </TableHead>
+    <TableBody>
+
+        <TableRow>
+            <TableCell align="center">`-m` <br/>`--model`</TableCell>
+            <TableCell align="center">`string` <Badge text="必填" type="danger"/> </TableCell>
+            <TableCell align="left">
+                Model，必须是已存在于 proto 中的
+            </TableCell>
+            <TableCell align="left">
+            </TableCell>
+        </TableRow>
+
+        <TableRow>
+            <TableCell align="center">`-a` <br/>`--action`</TableCell>
+            <TableCell align="center">`string` <Badge text="必填" type="danger"/> </TableCell>
+            <TableCell align="left">
+                需要添加的行为，多个用分号隔开<br/>
+                允许指定角色，多个角色用都好隔开，如 `add:admin,public`
+            </TableCell>
+            <TableCell align="left">
+                `add` -> 添加、创建 <br/>
+                `set` -> 修改 <br/>
+                `get` -> 获取详情 <br/>
+                `list` -> 获取列表 <br/>
+                `del` -> 删除 <br/>
+                `update` -> 更新
+            </TableCell>
+        </TableRow>
+
+        <TableRow>
+            <TableCell align="center">`--default-role`</TableCell>
+            <TableCell align="center">`string`</TableCell>
+            <TableCell align="left">
+                默认的角色，参考 action 当中的角色
+            </TableCell>
+            <TableCell align="left">
+            </TableCell>
+        </TableRow>
+
+        <TableRow>
+            <TableCell align="center">`-t` <br/>`--gen-to`</TableCell>
+            <TableCell align="center">`string`</TableCell>
+            <TableCell align="left">
+                生成接口实现的 .go 文件相对路径
+            </TableCell>
+            <TableCell align="left">
+            </TableCell>
+        </TableRow>
+
+        <TableRow>
+            <TableCell align="center">`-l` <br/>`--list-option`</TableCell>
+            <TableCell align="center">`string`</TableCell>
+            <TableCell align="left">
+                针对列表接口的筛选 <br/>
+                多个用分号隔开，例如 `id;name:like`
+            </TableCell>
+            <TableCell align="left">
+                `str`/`string` <br/>
+                `like` <br/>
+                `left-like`/`leftLike`/`llike`/`left_like` <br/>
+                `right-like`/`rightLike`/`rlike`/`right_like` <br/>
+                <br/>
+                `uint` <br/>
+                `u8`/`uint8` <br/>
+                `u16`/`uint16` <br/>
+                `u32`/`uint32` <br/>
+                `u64`/`uint64` <br/>
+                <br/>
+                `i8`/`int8` <br/>
+                `i16`/`int16` <br/>
+                `i32`/`int32` <br/>
+                `i64`/`int64` <br/>
+                <br/>
+                `f32`/`float32` <br/>
+                `f64`/`float64` <br/>
+                <br/>
+                `uints` <br/>
+                `u16s`/`uint16s` <br/>
+                `u32s`/`uint32s` <br/>
+                `u64s`/`uint64s` <br/>
+                <br/>
+                `i8s`/`int8s` <br/>
+                `i16s`/`int16s` <br/>
+                `i32s`/`int32s` <br/>
+                `i64s`/`int64s` <br/>
+                <br/>
+                `f32s`/`float32s` <br/>
+                `f64s`/`float64s` <br/>
+
+            </TableCell>
+        </TableRow>
+
+    </TableBody>
+</Table>
