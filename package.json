@@ -15,13 +15,13 @@
     "@mui/lab": "^5.0.0-alpha.170",
     "@mui/material": "^5.15.18",
     "react": "^18.3.1",
-    "rspress": "^1.20.1"
-  },
-  "devDependencies": {
+    "rspress": "^1.20.1",
     "@rspress/plugin-last-updated": "^1.21.1",
     "@rspress/plugin-preview": "^1.21.1",
     "@rspress/plugin-shiki": "^1.21.1",
     "@rspress/plugin-typedoc": "^1.21.1",
     "@types/node": "^16"
+  },
+  "devDependencies": {
   }
 }

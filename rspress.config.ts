@@ -1,6 +1,6 @@
 import * as path from 'path';
 import {defineConfig} from 'rspress/config';
-import {pluginLastUpdated} from '@rspress/plugin-last-updated';
+// import {pluginLastUpdated} from '@rspress/plugin-last-updated';
 // import { pluginPreview } from '@rspress/plugin-preview';
 // import { pluginShiki } from '@rspress/plugin-shiki';
 // import ghPages from 'rspress-plugin-gh-pages';
@@ -23,7 +23,7 @@ export default defineConfig({
         defaultWrapCode: true,
     },
     plugins: [
-        pluginLastUpdated(),
+        // pluginLastUpdated(),
         // pluginPreview(),
         // pluginShiki(),
         // ghPages({
