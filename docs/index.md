@@ -7,7 +7,7 @@ hero:
   actions:
     - theme: brand
       text: 快速开始
-      link: /start/
+      link: /document/lazygophers
     - theme: alt
       text: Github
       link: https://github.com/lazygophers

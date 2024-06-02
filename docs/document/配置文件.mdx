@@ -32,25 +32,36 @@ go_module_prefix: "<go module的前缀，在生成时会拼接proto中的 go_pac
 # 不在 指定 proto 文件所在目录的其它被引用的包路径
 #	支持绝对路径、相对生成路径 (相对于 output_path)
 proto_files:
-    - "./core/"
+    - "./lrpc/"
     - "~/proto/"
+
+style:
+    # 命名风格，支持以下格式
+    #   snake
+    #   camel
+    #   pascal
+    #   kebab
+    path: "<rpc 请求路径命名风格，默认为 rpc name>"
 
 # 自定义模版文件，要求 .gtpl 格式
 template:
     # .editorconfig 模板文件路径，用于 IDE 的默认格式化
-    editorconfig: "<.editorconfig 文件路径，如果不存在则使用默认>"
+    editorconfig: "<.editorconfig> 文件路径，如果不存在则使用默认"
     # orm.go 模板文件路径，用于 gorm 的相关数据生成
-    orm: "<orm.go 模板文件路径，如果不存在则是使用默认>"
+    orm: "<orm.go> 模板文件路径，如果不存在则是使用默认"
+
     # table_name.go 模板文件路径，用于 gorm 的相关表名
-    table_name: "<table_name.go 模板文件路径，如果不存在则是使用默认>"
+    table_name: "<table_name.go> 模板文件路径，如果不存在则是使用默认"
+
+    # table_field.go 模板文件路径，用于 gorm 的相关字段名，用于数据库操作时字段填写
+    table_field: "<table_field.go> 模板文件路径，如果不存在则是使用默认"
 
     # .proto 文件相关的模板文件
     proto:
         # rpc 服务的模板文件路径
-        service: "proto.service 的模板文件路径"
-
+        rpc: "proto.service 的模板文件路径"
         # rpc 相关的
-        rpc:
+        action:
             # key → action value → 模版文件路径
             add:
                 name: "rpc 名字的生成模板"
@@ -73,6 +84,29 @@ template:
                 name: "rpc 名字的生成模板"
                 req: "message.request 生成模板"
                 resp: "messsage.response 生成模板"
+
+    impl:
+        # impl.go 模板文件路径
+        impl: "<impl.go> 的模板文件路径"
+
+        # rpc请求路径模板文件路径
+        path: "<rpc_path.go> 的模板文件路径"
+
+        # 路由相关的配置
+        route: "<rpc_route.go> 的模板文件路径"
+
+        # rpc 相关的
+        action:
+            # key → action value → 模版文件路径
+            add: "创建数据的模板路径"
+            set: "修改数据的模板路径"
+            update: "更新数据的模板路径"
+            del: "删除数据的模板路径"
+            list: "列表数据的模板路径"
+            "": "默认的模版路径"
+
+    # 入口文件
+    main: "<main.go> 模板文件路径"
 
     # state/table.go 模板文件路径
     table: "<state/table.go 模板文件路径，如果不存在则是使用默认>"
@@ -114,5 +148,4 @@ tables:
     disable_field_deleted_at: false
     # 关闭自动生成 column 的gorm tag，默认为 false
     disable_gorm_tag_column: false
-
 ```
